@@ -1,20 +1,14 @@
-
-<?php 
-            
-      
-
- ?>
-
 <!DOCTYPE html>
 <html>
 <head>
-      <title>History - Contflix</title>
-      <link rel="icon" href="img/eye.png">
-            <link rel="stylesheet" href="css/bootstrap.css" media="all"/>
-         
+    <title>History - Contflix</title>
+    <link rel="icon" href="img/eye.png">
+    <link rel="stylesheet" href="css/bootstrap.css" media="all"/>
+    <link rel="stylesheet" href="bootstrap-theme.css" media="all"/>
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
              <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -49,55 +43,68 @@
             
             <div class="jumbotron">
                   <div class="page-header">
-	      		   <img class="img-circle img-responsive center-block" src="img/notebook.png" alt="Generic placeholder image" width="140" height="140" style="background-color: #bbb">
-	              <h1 class="text-center">History</h1>
-            </div>
+                 <img class="img-circle img-responsive center-block" src="img/notebook.png" alt="Generic placeholder image" width="140" height="140" style="background-color: #bbb">
+                      <h1 class="text-center">History</h1>
+                    </div>
             
                 <ul class="nav nav-tabs">
-                    <li role="presentation"><a href="history.php">Select</a></li>
-                    <li role="presentation" class="active"><a href="registerHist.php">Create</a></li>
-                    <li role="presentation"><a href="updateHist.php">Update</a></li>
-                    <li role="presentation"><a href="deleteHist.php">Delete</a></li>       
+                    <li role="presentation" ><a href="history.php">Select</a></li>
+                    <li role="presentation"><a href="registerHist.php">Create</a></li>
+                    <li role="presentation" class="active"><a href="updateHist.php">Update</a></li>
+                    <li role="presentation"><a href="deleteHist.php">Delete</a></li>    
                 </ul>
-
+                
                         <div class="row">
 
                               <?php 
-                                   if (!isset ($_POST['register']) ||($_POST['register'] != 'Register')) {
+
+                                require 'vendor/autoload.php';
+                                  $client = new MongoDB\Client;
+                                  $contdb = $client->contdb;
+                                  $userCollection = $contdb->contCollection;
+                                  session_start();
+                                  $usu = $_SESSION['idHist'];
+
+                                 
+                                  if (!isset ($_POST['register']) ||($_POST['register'] != 'Register')) {
                                     ?>
                                     <div class="col-md-8 col-md-offset-2" style="margin-top: 40px;">
-                                          <form method="post" action="registerHist.php" role="form" data-toggle="validator">
+                                          <form method="post" action="updateHist2.php" role="form" data-toggle="validator">
                                                 <div class="form-group">
-                                                    <label for="name" class="control-label">User's id</label>
-                                                    <input type="text" class="form-control" id="inputName" placeholder="for Example: 58f17d65923faa17d80003c3" name="usId" required>
+                                                                            <label for="name" class="control-label">user Id</label>
+                                                                            <input type="text" class="form-control" id="inputIdUser" value= "<?php echo $usu->usId; ?>" name="idus" required>
+                                                                          </div>
+                                                <div class="form-group">
+                                                                            <label for="telephone" class="control-label">content Id</label>
+                                                                            <input type="texy" class="form-control" id="inputIdCont" value= <?php echo $usu->conId; ?> name="idCont" required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="premier" class="control-label">Content's id</label>
-                                                    <input type="text" class="form-control" id="inputDate" placeholder="for Example: 58f17d65923faa17d80003c3" name="conId" required>
+                                                <div>
+                                                    <p>For integrity reasons, nobody could update date</p>
                                                 </div>
-                                                <div class="form-group">
-                                                <button type="submit" name='register' value='Register' class="btn btn-primary" > submit</button>
+                                                  <button type="submit" name='register' value='Register' class="btn btn-primary" > Update</button>
                                                 </div>
                                                                          
                                           </form>
                                     </div>
                                     <?php } else {   
-                                                if(insertHist($_POST['usId'],$_POST['conId'])){
+                                                if(updateCont($_POST['idus'],$_POST['idCont'])){
 
-                                    ?>
+                                          ?>
                                     <div class="col-md-8 col-md-offset-2" style="margin-top: 40px;">
                                          Work it
                                     </div>      
 
                                     <?php 
                                                 }else{
-                                    ?>
+                                                 ?>
                                            <div class="col-md-8 col-md-offset-2" style="margin-top: 40px;">
                                                <h4>User's id or Content's id not found</h4>
                                           </div>      
-                                    <?php
+                                                 <?php
                                                 }
                                           }?>
+
 
 
                         </div>
@@ -125,17 +132,18 @@
 
 <?php 
       
-      function insertHist($usId,$conId){
-         try{
-            $MongoIdUs = new MongoDB\BSON\ObjectID($usId);
-            $MongoIdCon = new MongoDB\BSON\ObjectID($conId);
+      function updateCont($idUs,$idCont){
             require 'vendor/autoload.php';
             $client = new MongoDB\Client;
             $contdb = $client->contdb;
+            try{
+                $MongoIdUs = new MongoDB\BSON\ObjectID($idUs);
+                $MongoIdCon = new MongoDB\BSON\ObjectID($idCont);
+                
 
 
-            $userCollection = $contdb->userCollection;
-            $contCollection = $contdb->contCollection;
+                $userCollection = $contdb->userCollection;
+                $contCollection = $contdb->contCollection;
            
                 $document1 = $userCollection->findone(
                     ['_id'=>$MongoIdUs]
@@ -149,16 +157,20 @@
                 $document2 = NULL;
             }
 
-            
-            if(!is_null($document1) and !is_null($document2)){
-            $histCollection = $contdb->histCollection;
-            $insertOneResult = $histCollection->insertOne(
-                        ['usId' => $usId,'conId'=>$conId, 'time'=>date('Y-m-d H:i:s',time())] 
-            );
+           
+            $id = $_SESSION['idHist'];
+            $MongoId = new MongoDB\BSON\ObjectID($id->_id);
+             if(!is_null($document1) and !is_null($document2)){
+                $histCollection = $contdb->histCollection;
+                
+                $replaceResult = $histCollection->updateOne(
+                      ['_id' =>  $MongoId],
+                      ['$set'=>['usId' => $idUs,'conId'=>$idCont]]
+                 );
+                
             return true;
-            }else{
-                return false;
             }
+        return false;
       }
       
  ?>

@@ -10,7 +10,7 @@
 <head>
       <title>Users - Contflix</title>
       <link rel="icon" href="img/eye.png">
-            <link rel="stylesheet" href="css/bootstrap.css" media="all"/>
+      <link rel="stylesheet" href="css/bootstrap.css" media="all"/>
          
 </head>
 <body>

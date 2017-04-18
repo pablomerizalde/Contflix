@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Users - Contflix</title>
+	<title>History - Contflix</title>
 	<link rel="icon" href="img/eye.png">
 	<link rel="stylesheet" href="css/bootstrap.css" media="all"/>
 	<link rel="stylesheet" href="bootstrap-theme.css" media="all"/>
@@ -42,9 +42,10 @@
 		<div class="col-md-10 col-md-offset-1" style="margin-top: -20px;">
 			
 			<div class="jumbotron">
-				<div class="page-header">
-		          <h1 class="text-center">History</h1>
-		        </div>
+				  <div class="page-header">
+		         <img class="img-circle img-responsive center-block" src="img/notebook.png" alt="Generic placeholder image" width="140" height="140" style="background-color: #bbb">
+		              <h1 class="text-center">History</h1>
+		            </div>
 			
 				<ul class="nav nav-tabs">
 					<li role="presentation" class="active"><a href="history.php">Select</a></li>

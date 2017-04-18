@@ -60,7 +60,7 @@
 	          <img class="second-slide imag" src="img/imgc.jpg" alt="Second slide">
 	          <div class="container">
 	            <div class="carousel-caption">
-	              <h1>Wow, such cute landing page.</h1>
+	              <h1>Mouch wow, such cute landing page.</h1>
 	              <p>We use Bootstrap3 and jQeury, to make an amazing User Experience.</p>
 	            </div>
 	          </div>

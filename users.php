@@ -42,7 +42,10 @@
 		<div class="col-md-10 col-md-offset-1" style="margin-top: -20px;">
 			
 			<div class="jumbotron">
-				<h1 class="text-center">Users</h1>
+				<div class="page-header">
+		          <img class="img-circle img-responsive center-block" src="img/girl.png" alt="Generic placeholder image" width="140" height="140" style="background-color: #bbb">
+		          <h1 class="text-center"> User</h1>
+		        </div>
 			
 				<ul class="nav nav-tabs">
 					<li role="presentation" class="active"><a href="users.php">Select</a></li>

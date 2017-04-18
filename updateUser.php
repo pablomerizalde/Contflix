@@ -1,54 +1,52 @@
 
-<?php 
-            
-      
-
- ?>
-
 <!DOCTYPE html>
 <html>
 <head>
-      <title>Users - Contflix</title>
-      <link rel="icon" href="img/eye.png">
-            <link rel="stylesheet" href="css/bootstrap.css" media="all"/>
-         
+  <title>Users - Contflix</title>
+  <link rel="icon" href="img/eye.png">
+  <link rel="stylesheet" href="css/bootstrap.css" media="all"/>
+  <link rel="stylesheet" href="bootstrap-theme.css" media="all"/>
 </head>
 <body>
 
-      <nav class="navbar navbar-defaul navbar-fixed-topt">
-            <div class="container-fluid">
-                   <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                          <span class="sr-only">Toggle navigation</span>
-                          <span class="icon-bar"></span>
-                          <span class="icon-bar"></span>
-                          <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="index.php">
-                              <span class="glyphicon glyphicon-eye-open"></span>
-                              ContFlix 
-                        </a>
-                   </div>
-                  
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-             <ul class="nav navbar-nav">
-                    <li class="active"><a href="users.php">Users </a></li>
-                  <li><a href="history.php">History</a></li>
+  <nav class="navbar navbar-default navbar-fixed-top  ">
+    <div class="container-fluid">
+       <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+        <a class="navbar-brand" href="index.php">
+          <span class="glyphicon glyphicon-eye-open"></span>
+          ContFlix 
+        </a>
+       </div>
+      
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+         <ul class="nav navbar-nav">
+          <li class="active"><a href="users.php">Users </a></li>
+        <li><a href="history.php">History</a></li>
           <li><a href="content.php">Content</a></li>
-                    <li><a href="info.php" ><span class="glyphicon glyphicon-info-sign"></span></a></li>
-                        </ul>
+          <li><a href="info.php" ><span class="glyphicon glyphicon-info-sign"></span></a></li>
+        </ul>
 
-                  </div>
+      </div>
+    </div>
+  </nav>
+
+
+
+
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1" style="margin-top: -20px;">
+      
+      <div class="jumbotron">
+        <div class="page-header">
+              <img class="img-circle img-responsive center-block" src="img/girl.png" alt="Generic placeholder image" width="140" height="140" style="background-color: #bbb">
+              <h1 class="text-center"> User</h1>
             </div>
-      </nav>
-      
-      
-      <div class="row">
-            <div class="col-md-10 col-md-offset-1" style="margin-top: -20px;">
-                  
-                  <div class="jumbotron">
-                        <h1 class="text-center">Users</h1>
-                  
                         <ul class="nav nav-tabs">
                               <li role="presentation"><a href="users.php">Select</a></li>
                               <li role="presentation"><a href="registerUser.php">Create</a></li>

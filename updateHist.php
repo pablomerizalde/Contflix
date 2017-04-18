@@ -1,21 +1,13 @@
-
-<?php 
-            
-      
-
- ?>
-
 <!DOCTYPE html>
-<html>  
+<html>
 <head>
-      <title>History - Contflix</title>
-      <link rel="icon" href="img/eye.png">
-            <link rel="stylesheet" href="css/bootstrap.css" media="all"/>
-         
+  <title>History - Contflix</title>
+  <link rel="icon" href="img/eye.png">
+  <link rel="stylesheet" href="css/bootstrap.css" media="all"/>
+  <link rel="stylesheet" href="bootstrap-theme.css" media="all"/>
 </head>
 <body>
 
-   
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
        <div class="navbar-header">
@@ -50,27 +42,29 @@
     <div class="col-md-10 col-md-offset-1" style="margin-top: -20px;">
       
       <div class="jumbotron">
-        <div class="page-header">
-         <img class="img-circle img-responsive center-block" src="img/notebook.png" alt="Generic placeholder image" width="140" height="140" style="background-color: #bbb">
-              <h1 class="text-center">History</h1>
-            </div>
+          <div class="page-header">
+             <img class="img-circle img-responsive center-block" src="img/notebook.png" alt="Generic placeholder image" width="140" height="140" style="background-color: #bbb">
+                  <h1 class="text-center">History</h1>
+                </div>
       
         <ul class="nav nav-tabs">
           <li role="presentation"><a href="history.php">Select</a></li>
           <li role="presentation"><a href="registerHist.php">Create</a></li>
-          <li role="presentation"><a href="updateHist.php">Update</a></li>
-          <li role="presentation" class="active"><a href="deleteHist.php">Delete</a></li>  
+          <li role="presentation" class="active"><a href="updateHist.php">Update</a></li>
+          <li role="presentation"><a href="deleteHist.php">Delete</a></li>  
         </ul>
+          
+
 
 
                         <div class="row">
                                <?php   if (!isset ($_POST['idUser']) ||($_POST['idUser'] != 'IDUSER')) {
                                  ?>
                                          <div class="col-md-4 col-md-offset-2" style="margin-top: 40px;">
-                                          <form method="post" action="deleteHist.php" role="form" data-toggle="validator">
+                                          <form method="post" action="updateHist.php" role="form" data-toggle="validator">
                                                
                                                 <div class="form-group">
-                                                        <label for="idUs" class="control-label">Hist id</label>
+                                                        <label for="idUs" class="control-label">Historial id</label>
                                                         <input type="text" class="form-control" id="inputId" placeholder="for Example: 58f17d65923faa17d80003c3" name="idUs" required>
                                                 </div>
                                     
@@ -81,19 +75,15 @@
                                     </div>
                                 <?php
                                   }else{
-                                     if(  deleteHist($_POST['idUs'])  ){ 
-                                        ?> 
-                                        <div class="col-md-6 col-md-offset-2" style="margin-top: 40px;">
-                                        <h3>History deleted correctly</h3>
-                                        </div>
-                                        <?php
+                                     if( findHist($_POST['idUs'])  ){ 
+                                       
+                                        header ("Location: updateHist2.php");
                                        }else{
                                     ?>  
                                     <div class="col-md-6 col-md-offset-2" style="margin-top: 40px;">
-                                      <div class="alert alert-danger" role="alert">History not foud, try with another id</div>
-                                      <form action="deleteHist.php">
+                                      <h3>History not foud, try with another id</h3>
+                                      <form action="updateHist.php"</form>
                                        <button class="btn btn-primary" type="submit" >Try again</button>
-                                       </form>
                                     </div>
                                 <?php }} ?>    
                         </div>
@@ -120,30 +110,31 @@
 </html>
 
 <?php 
-      function deleteHist($id){
-        try{
+      function findHist($id){
+            try{
+            $MongoId = new MongoDB\BSON\ObjectID($id);
+            require 'vendor/autoload.php';
+            $client = new MongoDB\Client;
+            $contdb = $client->contdb;
+            $contCollection = $contdb->histCollection;
+
+
+            $document = $contCollection->findOne(
+              ['_id'=> $MongoId]
+            );
+
+            if(is_null($document)){
+              return false;
+            }else{
+               session_start();
+               $_SESSION['idHist']=$document;
+               return true;
+            }
               
-              $MongoId = new MongoDB\BSON\ObjectID($id);
-              require 'vendor/autoload.php';
-              $client = new MongoDB\Client;
-              $contdb = $client->contdb;
-              $userCollection = $contdb->histCollection;
-
-
-              $deleteResult = $userCollection->deleteOne(
-                ['_id'=> $MongoId]
-              );
-              if($deleteResult->getDeletedCount()==0){
-                return false;
-              }else{
-                 return true;
-              }
-                
 
             }catch(Exception $e){
               return false;
             }
-
       }
       
  ?>

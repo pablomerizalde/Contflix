@@ -46,7 +46,7 @@
             
             <div class="jumbotron">
                  <div class="page-header">
-                    <img class="img-circle img-responsive center-block" src="img/video-camerao90.png" alt="Generic placeholder image" width="140" height="140" style="background-color: #bbb">
+                    <img class="img-circle img-responsive center-block" src="img/video-camera.png" alt="Generic placeholder image" width="140" height="140" style="background-color: #bbb">
                     <h1 class="text-center"> Content</h1>
                 </div>
             
@@ -65,14 +65,14 @@
                                    if (!isset ($_POST['register']) ||($_POST['register'] != 'Register')) {
                                     ?>
                                     <div class="col-md-8 col-md-offset-2" style="margin-top: 40px;">
-                                          <form method="post" action="registerCont.php" role="form" data-toggle="validator">
+                                          <form method="post" action="registerCont.php" role="form" data-toggle="validator" class="rangeForm">
                                                 <div class="form-group">
                                                     <label for="name" class="control-label">Name</label>
                                                     <input type="text" class="form-control" id="inputName" placeholder="Cina Saffary" name="name" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="premier" class="control-label">Premier date</label>
-                                                    <input type="date" class="form-control" id="inputDate" placeholder="" name="date" required>
+                                                    <input type="date" class="form-control" id="inputDate" placeholder="" name="date"  required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="country" class="control-label">Country</label>
@@ -367,8 +367,7 @@
       <script type="text/javascript" src="js/jquery-3.2.1.min.js" ></script>
 
       <script type="text/javascript" src="js/bootstrap.min.js" ></script>
-
-
+   
 
       </script>
 </body>

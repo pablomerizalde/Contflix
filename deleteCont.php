@@ -122,7 +122,7 @@
               $client = new MongoDB\Client;
               $contdb = $client->contdb;
               $userCollection = $contdb->contCollection;
-
+              $histCollection = $contdb->histCollection;
 
               $deleteResult = $userCollection->deleteOne(
                 ['_id'=> $MongoId]
@@ -130,6 +130,9 @@
               if($deleteResult->getDeletedCount()==0){
                 return false;
               }else{
+                 $delete = $histCollection->deleteMany(
+                  ['conId'=> $id]
+                );
                  return true;
               }
                 
