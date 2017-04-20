@@ -73,7 +73,14 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="premier" class="control-label">Content's id</label>
-                                                    <input type="text" class="form-control" id="inputDate" placeholder="for Example: 58f17d65923faa17d80003c3" name="conId" required>
+
+                                                    <select id="country" class="form-control" name="conId" required>
+                                                    <option value=""></option>
+                                                    <?php 
+                                                      showCont();
+                                                     ?>
+                                                     </select>
+                                                   <!--  <input type="text" class="form-control" id="inputDate" placeholder="for Example: 58f17d65923faa17d80003c3" name="conId" required> -->
                                                 </div>
                                                 <div class="form-group">
                                                 <button type="submit" name='register' value='Register' class="btn btn-primary" > submit</button>
@@ -160,5 +167,28 @@
                 return false;
             }
       }
+
+
+      function showCont(){
+      
+
+        require 'vendor/autoload.php';
+        $client = new MongoDB\Client;
+        $contdb = $client->contdb;
+        $contCollection = $contdb->contCollection;
+
+        $documentList = $contCollection->find();
+        $numb = 1;
+        foreach ($documentList as $doc) {
+          $año = explode("-",$doc->date);
+          echo "<option value=\"";
+          echo "$doc->_id";
+          echo "\">";
+          echo "$doc->name (";
+          echo($año[0]);
+          echo ")</option>";
+        }
+      }
       
  ?>
+

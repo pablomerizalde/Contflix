@@ -92,7 +92,7 @@
                                                 </div>
                                                  <div class="form-group">
                                                                             <label for="address" class="control-label">Address</label>
-                                                                            <input type="text" class="form-control" id="inputAddres"value= <?php echo $usu->address; ?> name="address" required>
+                                                                            <input type="text" class="form-control" id="inputAddres"value= "<?php echo $usu->address; ?>" name="address" required>
                                                 </div>
                                                         
                                                 <div class="form-group">
